@@ -37,7 +37,11 @@ interface GoogleDNSResponse {
     type: number;
   }>;
 }
-// single value ⭐️
+
+const sanitizeDomain = (domain: string): string => {
+  return domain.replace(/^(https?:\/\/)?(www\.)?/, "");
+};
+
 /**
  * Validates input parameters for DNS propagation check
  */
@@ -78,7 +82,7 @@ const validateDNSResponse = (response: GoogleDNSResponse, expectedValue: string,
  */
 const queryDNS = async (domain: string, type: DNSRecordType, expectedValue: string): Promise<DNSCheckResult> => {
   const ENDPOINT = "https://dns.google/resolve";
-  const url = `${ENDPOINT}?name=${domain}&type=${type}&cd=1`;
+  const url = `${ENDPOINT}?name=${sanitizeDomain(domain)}&type=${type}&cd=1`;
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -144,8 +148,6 @@ export const verifyDNSPropagation = (
   });
 };
 
-// multi value ⭐️
-
 /**
  * Validates the DNS query object structure and values
  */
@@ -207,7 +209,7 @@ const queryMultipleDNS = async (
   for (const [recordType, query] of Object.entries(dnsQueries)) {
     try {
       const ENDPOINT = "https://dns.google/resolve";
-      const url = `${ENDPOINT}?name=${query.domain}&type=${recordType}&cd=1`;
+      const url = `${ENDPOINT}?name=${sanitizeDomain(query.domain)}&type=${recordType}&cd=1`;
 
       const response = await fetch(url);
       if (!response.ok) {
