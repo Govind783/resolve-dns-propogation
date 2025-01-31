@@ -1,7 +1,7 @@
 {
   "name": "resolve-dns-propogation",
   "description": "A simple utility to check DNS propagation works in frontend and bakend environment",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": ["dist"],

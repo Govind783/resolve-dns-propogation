@@ -45,6 +45,9 @@ __export(index_exports, {
 });
 module.exports = __toCommonJS(index_exports);
 var VALID_DNS_TYPES = ["A", "AAAA", "CNAME", "MX", "NS", "TXT", "SRV", "PTR", "SOA", "CAA"];
+var sanitizeDomain = (domain) => {
+  return domain.replace(/^(https?:\/\/)?(www\.)?/, "");
+};
 var validateInputs = (type, domain, expectedValue) => {
   if (!VALID_DNS_TYPES.includes(type)) {
     return { code: "INVALID_TYPE", message: `Invalid DNS record type: ${type}` };
@@ -70,7 +73,7 @@ var validateDNSResponse = (response, expectedValue, type) => {
 };
 var queryDNS = (domain, type, expectedValue) => __async(void 0, null, function* () {
   const ENDPOINT = "https://dns.google/resolve";
-  const url = `${ENDPOINT}?name=${domain}&type=${type}&cd=1`;
+  const url = `${ENDPOINT}?name=${sanitizeDomain(domain)}&type=${type}&cd=1`;
   const response = yield fetch(url);
   if (!response.ok) {
     throw { code: "HTTP_STATUS", message: `HTTP error ${response.status}` };
@@ -146,7 +149,7 @@ var queryMultipleDNS = (dnsQueries, attempt = 0, maxRetries = 2) => __async(void
   for (const [recordType, query] of Object.entries(dnsQueries)) {
     try {
       const ENDPOINT = "https://dns.google/resolve";
-      const url = `${ENDPOINT}?name=${query.domain}&type=${recordType}&cd=1`;
+      const url = `${ENDPOINT}?name=${sanitizeDomain(query.domain)}&type=${recordType}&cd=1`;
       const response = yield fetch(url);
       if (!response.ok) {
         throw { code: "HTTP_STATUS", message: `HTTP error ${response.status}` };
