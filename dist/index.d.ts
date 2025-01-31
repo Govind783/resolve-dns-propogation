@@ -26,6 +26,6 @@ declare const verifyDNSPropagation: (type: DNSRecordType, domain: string, expect
  * @param dnsQueries - Object containing multiple DNS queries
  * @returns Promise resolving to results for all queries
  */
-declare const verifyDNSPropogationGroup: (dnsQueries: DNSQueryObject) => Promise<MultipleDNSCheckResult>;
+declare const verifyDNSPropagationGroup: (dnsQueries: DNSQueryObject) => Promise<MultipleDNSCheckResult>;
 
-export { verifyDNSPropagation, verifyDNSPropogationGroup };
+export { verifyDNSPropagation, verifyDNSPropagationGroup };

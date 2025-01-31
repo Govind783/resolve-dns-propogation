@@ -253,7 +253,7 @@ const queryMultipleDNS = async (
  * @param dnsQueries - Object containing multiple DNS queries
  * @returns Promise resolving to results for all queries
  */
-export const verifyDNSPropogationGroup = async (dnsQueries: DNSQueryObject): Promise<MultipleDNSCheckResult> => {
+export const verifyDNSPropagationGroup = async (dnsQueries: DNSQueryObject): Promise<MultipleDNSCheckResult> => {
   return new Promise(async (resolve, reject) => {
     const validationError = validateDNSObject(dnsQueries);
     if (validationError) {

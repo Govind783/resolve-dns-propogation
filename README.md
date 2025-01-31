@@ -14,7 +14,7 @@ A fast and reliable DNS propagation checker. Check single or multiple DNS record
 ## Installation
 
 ```bash
-npm install resolve-dns-propogation
+npm install resolve-dns-propagation
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ npm install resolve-dns-propogation
 ### Single DNS Record Check
 
 ```typescript
-import { verifyDNSPropagation } from "resolve-dns-propogation";
+import { verifyDNSPropagation } from "resolve-dns-propagation";
 
 // Using async/await
 async function checkDNS() {
@@ -53,7 +53,7 @@ verifyDNSPropagation("CNAME", "blog.example.com", "example.netlify.app")
 ### Multiple DNS Records Check
 
 ```typescript
-import { verifyDNSPropogationGroup } from "resolve-dns-propogation";
+import { verifyDNSPropagationGroup } from "resolve-dns-propagation";
 
 const dnsQueries = {
   CNAME: {
@@ -73,7 +73,7 @@ const dnsQueries = {
 // Using async/await
 async function checkMultipleDNS() {
   try {
-    const results = await verifyDNSPropogationGroup(dnsQueries);
+    const results = await verifyDNSPropagationGroup(dnsQueries);
 
     for (const [recordType, result] of Object.entries(results)) {
       console.log(`${recordType}:`, result.message);
@@ -84,7 +84,7 @@ async function checkMultipleDNS() {
 }
 
 // Using .then with results processing
-verifyDNSPropogationGroup(dnsQueries)
+verifyDNSPropagationGroup(dnsQueries)
   .then((results) => {
     for (const [recordType, result] of Object.entries(results)) {
       console.log(`${recordType}:`, result.message);
@@ -102,7 +102,7 @@ verifyDNSPropogationGroup(dnsQueries)
 ```typescript
 type DNSRecordType = "A" | "AAAA" | "CNAME" | "MX" | "NS" | "TXT" | "SRV" | "PTR" | "SOA" | "CAA";
 
-verifyDNSPropogationGroup(
+verifyDNSPropagationGroup(
   type: DNSRecordType,     // DNS record type
   domain: string,          // Domain to check
   expectedValue: string    // Expected value

@@ -41,7 +41,7 @@ var __async = (__this, __arguments, generator) => {
 var index_exports = {};
 __export(index_exports, {
   verifyDNSPropagation: () => verifyDNSPropagation,
-  verifyDNSPropogationGroup: () => verifyDNSPropogationGroup
+  verifyDNSPropagationGroup: () => verifyDNSPropagationGroup
 });
 module.exports = __toCommonJS(index_exports);
 var VALID_DNS_TYPES = ["A", "AAAA", "CNAME", "MX", "NS", "TXT", "SRV", "PTR", "SOA", "CAA"];
@@ -179,7 +179,7 @@ var queryMultipleDNS = (dnsQueries, attempt = 0, maxRetries = 2) => __async(void
   }
   return results;
 });
-var verifyDNSPropogationGroup = (dnsQueries) => __async(void 0, null, function* () {
+var verifyDNSPropagationGroup = (dnsQueries) => __async(void 0, null, function* () {
   return new Promise((resolve, reject) => __async(void 0, null, function* () {
     const validationError = validateDNSObject(dnsQueries);
     if (validationError) {
@@ -200,5 +200,5 @@ var verifyDNSPropogationGroup = (dnsQueries) => __async(void 0, null, function* 
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   verifyDNSPropagation,
-  verifyDNSPropogationGroup
+  verifyDNSPropagationGroup
 });
